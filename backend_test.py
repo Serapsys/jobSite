@@ -166,6 +166,31 @@ class JobPortalAPITester:
         if not success:
             return False
 
+        # Login as the participant to get their ID
+        success, login_response = self.run_test(
+            "Login Participant",
+            "POST",
+            "auth/login",
+            200,
+            data={"email": test_email, "password": test_password}
+        )
+        if not success:
+            return False
+
+        # Get participant's user data
+        temp_token = login_response["token"]
+        headers_backup = self.token
+        self.token = temp_token
+        success, participant_data = self.run_test(
+            "Get Participant Data",
+            "GET",
+            "auth/me",
+            200
+        )
+        self.token = headers_backup
+        if not success:
+            return False
+
         # Start a new chat
         success, chat_response = self.run_test(
             "Start New Chat",
@@ -173,7 +198,7 @@ class JobPortalAPITester:
             "chat/start",
             200,
             data={
-                "participantId": participant_response["user"]["id"],
+                "participantId": participant_data["_id"],
                 "initialMessage": "Hello, this is a test message!"
             }
         )
