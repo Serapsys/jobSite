@@ -81,6 +81,23 @@ const ProfileState = props => {
     }
   };
 
+  // Get all profiles
+  const getAllProfiles = async () => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/profile/all`);
+
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: err.response?.data?.message || 'Could not get profiles'
+      });
+    }
+  };
+
   // Clear profile
   const clearProfile = () => dispatch({ type: CLEAR_PROFILE });
 
@@ -88,11 +105,13 @@ const ProfileState = props => {
     <ProfileContext.Provider
       value={{
         profile: state.profile,
+        profiles: state.profiles,
         error: state.error,
         loading: state.loading,
         getMyProfile,
         getProfileById,
         createProfile,
+        getAllProfiles,
         clearProfile
       }}
     >
