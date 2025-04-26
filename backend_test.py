@@ -89,7 +89,34 @@ class JobPortalAPITester:
             "fullName": "Test User",
             "bio": "Test bio",
             "skills": ["Python", "JavaScript"],
-            "experience": "5 years"
+            "experience": [{
+                "title": "Software Engineer",
+                "company": "Test Company",
+                "location": "Remote",
+                "from": "2020-01-01",
+                "to": "2024-01-01",
+                "current": False,
+                "description": "Test role"
+            }],
+            "education": [{
+                "school": "Test University",
+                "degree": "Bachelor's",
+                "fieldOfStudy": "Computer Science",
+                "from": "2016-01-01",
+                "to": "2020-01-01",
+                "current": False,
+                "description": "Test education"
+            }],
+            "location": "Test City",
+            "contactInfo": {
+                "email": "test@example.com",
+                "phone": "1234567890",
+                "socialMedia": {
+                    "linkedin": "https://linkedin.com/test",
+                    "twitter": "https://twitter.com/test",
+                    "github": "https://github.com/test"
+                }
+            }
         }
         return self.run_test(
             "Create Profile",
