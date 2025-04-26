@@ -16,7 +16,7 @@ class JobPortalAPITester:
         url = f"{self.base_url}/api/{endpoint}"
         headers = {'Content-Type': 'application/json'}
         if self.token:
-            headers['Authorization'] = f'Bearer {self.token}'
+            headers['x-auth-token'] = self.token  # Changed to x-auth-token
 
         self.tests_run += 1
         print(f"\n🔍 Testing {name}...")
@@ -57,11 +57,11 @@ class JobPortalAPITester:
             "Register User",
             "POST",
             "auth/register",
-            200,  # Changed from 201 to 200
+            200,
             data={"username": username, "email": email, "password": password}
         )
         if success and 'token' in response:
-            self.token = response['token']  # Save token from registration
+            self.token = response['token']
             return True
         return False
 
@@ -94,7 +94,7 @@ class JobPortalAPITester:
             "Create Profile",
             "POST",
             "profile",
-            200,  # Changed from 201 to 200
+            200,
             data={"bio": bio, "skills": skills}
         )
 
