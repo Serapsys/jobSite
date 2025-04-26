@@ -74,12 +74,22 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="card">
-            <h2 className="text-xl font-bold mb-4">Messages</h2>
-            <p className="mb-4">Connect with employers and other job seekers</p>
-            <Link to="/chats" className="btn btn-primary">
-              View Messages
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="card">
+              <h2 className="text-xl font-bold mb-4">Messages</h2>
+              <p className="mb-4">Connect with employers and other job seekers</p>
+              <Link to="/chats" className="btn btn-primary block text-center">
+                View Messages
+              </Link>
+            </div>
+            
+            <div className="card">
+              <h2 className="text-xl font-bold mb-4">Browse Profiles</h2>
+              <p className="mb-4">Find and connect with other users</p>
+              <Link to="/profiles" className="btn btn-primary block text-center">
+                Browse Profiles
+              </Link>
+            </div>
           </div>
         </div>
       ) : (
