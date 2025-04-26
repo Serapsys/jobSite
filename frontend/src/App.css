@@ -1,38 +1,68 @@
-.App {
-    text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom classes */
+.btn {
+  @apply font-bold py-2 px-4 rounded;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.btn-primary {
+  @apply bg-blue-600 text-white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.btn-primary:hover {
+  @apply bg-blue-700;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.btn-secondary {
+  @apply bg-gray-500 text-white;
 }
 
-.App-link {
-    color: #61dafb;
+.btn-secondary:hover {
+  @apply bg-gray-600;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.btn-danger {
+  @apply bg-red-500 text-white;
+}
+
+.btn-danger:hover {
+  @apply bg-red-600;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-md p-6;
+}
+
+.form-group {
+  @apply mb-4;
+}
+
+.form-input {
+  @apply w-full p-2 border border-gray-300 rounded;
+}
+
+.form-label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.text-suggestion {
+  @apply bg-blue-50 p-4 rounded-lg border border-blue-100 mb-4;
+}
+
+.message-bubble {
+  @apply rounded-lg p-3 max-w-[75%] my-1;
+}
+
+.message-bubble-sent {
+  @apply message-bubble bg-blue-500 text-white ml-auto;
+}
+
+.message-bubble-received {
+  @apply message-bubble bg-gray-200 text-gray-800;
+}
+
+.typing-indicator {
+  @apply text-sm text-gray-500 italic my-1;
 }

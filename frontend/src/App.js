@@ -1,54 +1,71 @@
-import { useEffect } from "react";
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+// Components
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import Profile from './components/profile/Profile';
+import EditProfile from './components/profile/EditProfile';
+import Chat from './components/chat/Chat';
+import ChatList from './components/chat/ChatList';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
+// Context
+import AuthState from './context/auth/AuthState';
+import AlertState from './context/alert/AlertState';
+import ProfileState from './context/profile/ProfileState';
+import ChatState from './context/chat/ChatState';
+import Alert from './components/layout/Alert';
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+const App = () => {
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
+    <AuthState>
+      <ProfileState>
+        <ChatState>
+          <AlertState>
+            <Router>
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <main className="flex-grow container mx-auto px-4 py-6">
+                  <Alert />
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/profile" element={
+                      <PrivateRoute>
+                        <Profile />
+                      </PrivateRoute>
+                    } />
+                    <Route path="/edit-profile" element={
+                      <PrivateRoute>
+                        <EditProfile />
+                      </PrivateRoute>
+                    } />
+                    <Route path="/chats" element={
+                      <PrivateRoute>
+                        <ChatList />
+                      </PrivateRoute>
+                    } />
+                    <Route path="/chat/:id" element={
+                      <PrivateRoute>
+                        <Chat />
+                      </PrivateRoute>
+                    } />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
+            </Router>
+          </AlertState>
+        </ChatState>
+      </ProfileState>
+    </AuthState>
   );
 };
-
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-}
 
 export default App;
