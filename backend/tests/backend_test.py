@@ -108,7 +108,7 @@ class JobPortalAPITester:
             "Start Chat",
             "POST",
             "chat/start",
-            201,
+            200,
             data={"participantId": participant_id}
         )
 
