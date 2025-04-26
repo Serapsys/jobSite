@@ -47,6 +47,11 @@ const App = () => {
                         <EditProfile />
                       </PrivateRoute>
                     } />
+                    <Route path="/profiles" element={
+                      <PrivateRoute>
+                        <ProfileList />
+                      </PrivateRoute>
+                    } />
                     <Route path="/chats" element={
                       <PrivateRoute>
                         <ChatList />
