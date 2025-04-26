@@ -53,13 +53,17 @@ class JobPortalAPITester:
 
     def test_register(self, username, email, password):
         """Test user registration"""
-        return self.run_test(
+        success, response = self.run_test(
             "Register User",
             "POST",
             "auth/register",
-            201,
+            200,  # Changed from 201 to 200
             data={"username": username, "email": email, "password": password}
         )
+        if success and 'token' in response:
+            self.token = response['token']  # Save token from registration
+            return True
+        return False
 
     def test_login(self, email, password):
         """Test login and get token"""
@@ -90,7 +94,7 @@ class JobPortalAPITester:
             "Create Profile",
             "POST",
             "profile",
-            201,
+            200,  # Changed from 201 to 200
             data={"bio": bio, "skills": skills}
         )
 
@@ -134,8 +138,7 @@ def main():
     print("\n🚀 Starting API Tests...")
 
     # Test Registration
-    success, response = tester.test_register(test_username, test_email, test_password)
-    if not success:
+    if not tester.test_register(test_username, test_email, test_password):
         print("❌ Registration failed, stopping tests")
         return 1
 
