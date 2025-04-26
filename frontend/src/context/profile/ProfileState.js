@@ -4,6 +4,7 @@ import ProfileContext from './profileContext';
 import profileReducer from './profileReducer';
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_ERROR,
   CREATE_PROFILE,
   CLEAR_PROFILE
