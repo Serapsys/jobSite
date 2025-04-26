@@ -16,7 +16,7 @@ class JobPortalAPITester:
         url = f"{self.base_url}/api/{endpoint}"
         headers = {'Content-Type': 'application/json'}
         if self.token:
-            headers['x-auth-token'] = self.token  # Changed to x-auth-token
+            headers['x-auth-token'] = self.token
 
         self.tests_run += 1
         print(f"\n🔍 Testing {name}...")
@@ -88,14 +88,23 @@ class JobPortalAPITester:
             200
         )
 
-    def test_create_profile(self, bio, skills):
+    def test_create_profile(self, fullName, bio, skills):
         """Test creating a user profile"""
         return self.run_test(
             "Create Profile",
             "POST",
             "profile",
             200,
-            data={"bio": bio, "skills": skills}
+            data={
+                "fullName": fullName,
+                "bio": bio,
+                "skills": skills,
+                "location": "Remote",
+                "contactInfo": {
+                    "email": "test@example.com",
+                    "phone": "+1234567890"
+                }
+            }
         )
 
     def test_get_profile(self):
@@ -107,14 +116,23 @@ class JobPortalAPITester:
             200
         )
 
-    def test_update_profile(self, bio, skills):
+    def test_update_profile(self, fullName, bio, skills):
         """Test updating user profile"""
         return self.run_test(
             "Update Profile",
             "PUT",
             "profile",
             200,
-            data={"bio": bio, "skills": skills}
+            data={
+                "fullName": fullName,
+                "bio": bio,
+                "skills": skills,
+                "location": "Remote",
+                "contactInfo": {
+                    "email": "test@example.com",
+                    "phone": "+1234567890"
+                }
+            }
         )
 
     def test_get_text_suggestions(self, text):
@@ -133,6 +151,7 @@ def main():
     test_username = f"test_user_{uuid.uuid4().hex[:8]}"
     test_email = f"test_{uuid.uuid4()}@test.com"
     test_password = "TestPass123!"
+    test_fullname = "Test User"
 
     # Run tests
     print("\n🚀 Starting API Tests...")
@@ -155,6 +174,7 @@ def main():
 
     # Test Profile Creation
     success, _ = tester.test_create_profile(
+        test_fullname,
         "I am a software developer",
         ["Python", "JavaScript", "React"]
     )
@@ -170,6 +190,7 @@ def main():
 
     # Test Profile Update
     success, _ = tester.test_update_profile(
+        test_fullname,
         "I am an experienced software developer",
         ["Python", "JavaScript", "React", "Node.js"]
     )
