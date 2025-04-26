@@ -23,6 +23,15 @@ exports.getSuggestion = async (req, res) => {
       case 'casual':
         prompt = `Make the following text more casual and conversational: "${text}"`;
         break;
+      case 'enthusiastic':
+        prompt = `Make the following text more enthusiastic and engaging: "${text}"`;
+        break;
+      case 'professional':
+        prompt = `Rewrite the following text to sound more professional for a business context: "${text}"`;
+        break;
+      case 'concise':
+        prompt = `Make the following text extremely concise and to-the-point: "${text}"`;
+        break;
       default:
         prompt = `Improve the following text: "${text}"`;
     }
@@ -32,7 +41,7 @@ exports.getSuggestion = async (req, res) => {
       {
         model: 'deepseek-chat',
         messages: [
-          { role: 'system', content: 'You are a helpful assistant that improves text based on specific styles.' },
+          { role: 'system', content: 'You are a helpful assistant that improves text based on specific styles. Keep your suggestions focused only on style improvements and preserve all original meaning. Your responses should only include the modified text without any explanations or comments.' },
           { role: 'user', content: prompt }
         ],
         temperature: 0.7,
