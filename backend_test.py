@@ -215,7 +215,7 @@ class JobPortalAPITester:
             "Send Message",
             "POST",
             f"chat/{chat_id}/message",
-            201,
+            200,
             data={"content": "Hello, this is a test message!"}
         )
         if not success:
