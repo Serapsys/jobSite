@@ -9,6 +9,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Profile from './components/profile/Profile';
 import EditProfile from './components/profile/EditProfile';
+import ProfileList from './components/profile/ProfileList';
 import Chat from './components/chat/Chat';
 import ChatList from './components/chat/ChatList';
 import Dashboard from './components/dashboard/Dashboard';
