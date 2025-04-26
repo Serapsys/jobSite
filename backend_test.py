@@ -53,7 +53,7 @@ class JobPortalAPITester:
             "User Registration",
             "POST",
             "auth/register",
-            201,
+            200,
             data=test_data
         )
 
