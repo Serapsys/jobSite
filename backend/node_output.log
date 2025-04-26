@@ -1,0 +1,19 @@
+Server running on port 8001
+Connected to MongoDB
+[0mGET /api [32m200[0m 2.217 ms - 39[0m
+[0mGET /api/ [32m200[0m 2.278 ms - 39[0m
+[0mGET /api/ [36m304[0m 0.487 ms - -[0m
+[0mPOST /api/auth/register [32m200[0m 130.002 ms - 220[0m
+[0mPOST /api/auth/login [32m200[0m 97.841 ms - 220[0m
+[0mGET /api/auth/me [33m401[0m 0.763 ms - 44[0m
+[0mGET /api/auth/me [32m200[0m 6.275 ms - 149[0m
+[0mPOST /api/profile [32m200[0m 10.321 ms - 326[0m
+Suggestion API error: {
+  error: {
+    message: 'Insufficient Balance',
+    type: 'unknown_error',
+    param: null,
+    code: 'invalid_request_error'
+  }
+}
+[0mPOST /api/suggestions [31m500[0m 741.068 ms - 158[0m
