@@ -28,6 +28,25 @@ router.post(
 // @access  Private
 router.get('/', authMiddleware, profileController.getMyProfile);
 
+// @route   PUT /api/profile
+// @desc    Update user profile
+// @access  Private
+router.put(
+  '/',
+  [
+    authMiddleware,
+    [
+      check('fullName', 'Full name is required').not().isEmpty()
+    ]
+  ],
+  profileController.updateProfile
+);
+
+// @route   GET /api/profile/all
+// @desc    Get all profiles
+// @access  Public
+router.get('/all', profileController.getAllProfiles);
+
 // @route   GET /api/profile/:id
 // @desc    Get profile by user ID
 // @access  Public
