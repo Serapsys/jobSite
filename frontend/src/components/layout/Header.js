@@ -14,12 +14,17 @@ const Header = () => {
     <>
       <li className="mr-6">
         <Link to="/profile" className="text-blue-600 hover:text-blue-800">
-          Profile
+          My Profile
+        </Link>
+      </li>
+      <li className="mr-6">
+        <Link to="/profiles" className="text-blue-600 hover:text-blue-800">
+          Browse Profiles
         </Link>
       </li>
       <li className="mr-6">
         <Link to="/chats" className="text-blue-600 hover:text-blue-800">
-          Chats
+          Messages
         </Link>
       </li>
       <li>
