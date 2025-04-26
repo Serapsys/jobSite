@@ -23,6 +23,11 @@ router.post(
   profileController.createUpdateProfile
 );
 
+// @route   GET /api/profile
+// @desc    Get current user's profile (alternative route)
+// @access  Private
+router.get('/', authMiddleware, profileController.getMyProfile);
+
 // @route   GET /api/profile/:id
 // @desc    Get profile by user ID
 // @access  Public
