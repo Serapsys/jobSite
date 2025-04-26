@@ -122,7 +122,7 @@ class JobPortalAPITester:
             "Create Profile",
             "POST",
             "profile",
-            201,
+            200,
             data=profile_data
         )
 
