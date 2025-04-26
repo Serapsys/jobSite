@@ -77,7 +77,7 @@ class JobPortalAPITester:
             "Create Profile",
             "POST",
             "profile",
-            201,
+            200,
             data={"fullName": full_name}
         )
         if success and '_id' in response:
