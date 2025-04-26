@@ -180,7 +180,7 @@ def main():
             tester.test_send_message(chat['_id'], "Hello! This is a test message.")
 
     # 5. Test Text Suggestions
-    tester.test_suggestion(
+    tester.test_get_suggestion(
         "Can you help me with my job application?",
         "formal"
     )
