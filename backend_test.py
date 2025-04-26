@@ -149,13 +149,33 @@ class JobPortalAPITester:
 
     def test_chat_flow(self):
         """Test chat functionality"""
+        # Create another user to chat with
+        test_email = f"test_{uuid.uuid4().hex[:8]}@test.com"
+        test_password = "TestPass123!"
+        success, participant_response = self.run_test(
+            "Create Participant",
+            "POST",
+            "auth/register",
+            200,
+            data={
+                "username": f"test_user_{uuid.uuid4().hex[:8]}",
+                "email": test_email,
+                "password": test_password
+            }
+        )
+        if not success:
+            return False
+
         # Start a new chat
         success, chat_response = self.run_test(
             "Start New Chat",
             "POST",
             "chat/start",
-            201,
-            data={"participantId": str(uuid.uuid4())}  # Using random ID for test
+            200,
+            data={
+                "participantId": participant_response["user"]["id"],
+                "initialMessage": "Hello, this is a test message!"
+            }
         )
         if not success:
             return False
