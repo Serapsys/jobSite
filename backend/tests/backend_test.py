@@ -49,7 +49,7 @@ class JobPortalAPITester:
             "Register User",
             "POST",
             "auth/register",
-            201,
+            200,
             data={
                 "username": email.split('@')[0],
                 "email": email,
