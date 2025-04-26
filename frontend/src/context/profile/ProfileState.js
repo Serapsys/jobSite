@@ -13,6 +13,7 @@ import {
 const ProfileState = props => {
   const initialState = {
     profile: null,
+    profiles: [],
     error: null,
     loading: true
   };
