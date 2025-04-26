@@ -38,42 +38,29 @@ exports.getSuggestion = async (req, res) => {
 
     // For demonstration purposes, we'll generate responses locally
     // since the DeepSeek API is giving balance errors
-    let suggestion = text;
+    let suggestedText = text;
     
     switch (style) {
       case 'short':
       case 'concise':
-        suggestion = `${text.split(' ').slice(0, Math.max(5, text.split(' ').length / 2)).join(' ')}...`;
+        suggestedText = `${text.split(' ').slice(0, Math.max(5, text.split(' ').length / 2)).join(' ')}...`;
         break;
       case 'formal':
       case 'professional':
-        suggestion = `I would like to inform you that ${text.toLowerCase()}`;
+        suggestedText = `I would like to inform you that ${text.toLowerCase()}`;
         break;
       case 'casual':
-        suggestion = `Hey! ${text}`;
+        suggestedText = `Hey! ${text}`;
         break;
       case 'enthusiastic':
-        suggestion = `Wow! ${text}! This is amazing!`;
+        suggestedText = `Wow! ${text}! This is amazing!`;
         break;
       default:
-        suggestion = `Improved: ${text}`;
+        suggestedText = `Improved: ${text}`;
     }
     
-    // Mock API response structure
-    const response = {
-      data: {
-        choices: [
-          {
-            message: {
-              content: suggestion
-            }
-          }
-        ]
-      }
-    };
-
-    // Extract the suggestion from the response
-    const suggestion = response.data.choices[0].message.content;
+    // Use the locally generated suggestion directly
+    const suggestion = suggestedText;
 
     res.json({ suggestion });
   } catch (err) {
