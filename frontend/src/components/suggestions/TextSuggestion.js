@@ -51,7 +51,7 @@ const TextSuggestion = ({ text, fieldName, setFormData, formData }) => {
 
   return (
     <div className="mt-2">
-      <div className="flex flex-wrap gap-2 mb-2 hidden">
+      <div className="flex flex-wrap gap-2 mb-2">
         <button
           id="suggestion-short"
           type="button"
