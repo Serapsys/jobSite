@@ -51,14 +51,14 @@ class JobPortalAPITester:
             print(f"❌ Failed - Error: {str(e)}")
             return False, {}
 
-    def test_register(self, email, password):
+    def test_register(self, username, email, password):
         """Test user registration"""
         return self.run_test(
             "Register User",
             "POST",
             "auth/register",
             201,
-            data={"email": email, "password": password}
+            data={"username": username, "email": email, "password": password}
         )
 
     def test_login(self, email, password):
@@ -72,9 +72,17 @@ class JobPortalAPITester:
         )
         if success and 'token' in response:
             self.token = response['token']
-            self.user_id = response.get('user_id')
             return True
         return False
+
+    def test_get_current_user(self):
+        """Test getting current user profile"""
+        return self.run_test(
+            "Get Current User",
+            "GET",
+            "auth/me",
+            200
+        )
 
     def test_create_profile(self, bio, skills):
         """Test creating a user profile"""
@@ -91,7 +99,7 @@ class JobPortalAPITester:
         return self.run_test(
             "Get Profile",
             "GET",
-            f"profile/{self.user_id}",
+            "profile",
             200
         )
 
@@ -118,6 +126,7 @@ class JobPortalAPITester:
 def main():
     # Setup
     tester = JobPortalAPITester()
+    test_username = f"test_user_{uuid.uuid4().hex[:8]}"
     test_email = f"test_{uuid.uuid4()}@test.com"
     test_password = "TestPass123!"
 
@@ -125,7 +134,7 @@ def main():
     print("\n🚀 Starting API Tests...")
 
     # Test Registration
-    success, response = tester.test_register(test_email, test_password)
+    success, response = tester.test_register(test_username, test_email, test_password)
     if not success:
         print("❌ Registration failed, stopping tests")
         return 1
@@ -133,6 +142,12 @@ def main():
     # Test Login
     if not tester.test_login(test_email, test_password):
         print("❌ Login failed, stopping tests")
+        return 1
+
+    # Test Get Current User
+    success, user = tester.test_get_current_user()
+    if not success:
+        print("❌ Get current user failed")
         return 1
 
     # Test Profile Creation
