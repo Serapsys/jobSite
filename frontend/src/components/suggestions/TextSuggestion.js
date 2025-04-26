@@ -47,12 +47,13 @@ const TextSuggestion = ({ text, fieldName, setFormData, formData }) => {
     }
   };
 
-  if (!text || text.length < 10) return null;
+  if (!text || text.length < 5) return null;
 
   return (
     <div className="mt-2">
-      <div className="flex flex-wrap gap-2 mb-2">
+      <div className="flex flex-wrap gap-2 mb-2 hidden">
         <button
+          id="suggestion-short"
           type="button"
           onClick={() => getSuggestion('short')}
           className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-2 rounded"
@@ -61,6 +62,7 @@ const TextSuggestion = ({ text, fieldName, setFormData, formData }) => {
           Make it shorter
         </button>
         <button
+          id="suggestion-formal"
           type="button"
           onClick={() => getSuggestion('formal')}
           className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-2 rounded"
@@ -69,12 +71,40 @@ const TextSuggestion = ({ text, fieldName, setFormData, formData }) => {
           Make it formal
         </button>
         <button
+          id="suggestion-casual"
           type="button"
           onClick={() => getSuggestion('casual')}
           className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-2 rounded"
           disabled={loading}
         >
           Make it casual
+        </button>
+        <button
+          id="suggestion-enthusiastic"
+          type="button"
+          onClick={() => getSuggestion('enthusiastic')}
+          className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-2 rounded"
+          disabled={loading}
+        >
+          Make it enthusiastic
+        </button>
+        <button
+          id="suggestion-professional"
+          type="button"
+          onClick={() => getSuggestion('professional')}
+          className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-2 rounded"
+          disabled={loading}
+        >
+          Make it professional
+        </button>
+        <button
+          id="suggestion-concise"
+          type="button"
+          onClick={() => getSuggestion('concise')}
+          className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-2 rounded"
+          disabled={loading}
+        >
+          Make it concise
         </button>
       </div>
 
